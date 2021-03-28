@@ -1447,484 +1447,336 @@ for y in Target_Resources:
             Fuel_Target += results['In2_Target']
             Rubber_Target = 0
     elif y == "Screw": 
-    if Screw == 'Screw':
-        if y == Target_Resource:
-            Screw_Target = Target_Resource_Amount
-        z = Screw_Target / 40
-        print(y, ': ', round(z, 2), 'Constructor(s)\nRecipe:', Screw)
-        Target_Resources.append('Iron_Rod')
-        IR_Target += z * 10
-        z = 0
-        Screw_Target = 0
-    elif Screw == 'Casted_Screw':
-        if y == Target_Resource:
-            Screw_Target = Target_Resource_Amount
-        z = Screw_Target / 50
-        print(y, ': ', round(z, 2), 'Constructor(s)\nRecipe:', Screw)
-        Target_Resources.append('Iron_Ingot')
-        II_Target += z * 12.5
-        z = 0
-        Screw_Target = 0
-    elif Screw == 'Steel_Screw':
-        if y == Target_Resource:
-            Screw_Target = Target_Resource_Amount
-        z = Screw_Target / 260
-        print(y, ': ', round(z, 2), 'Constructor(s)\nRecipe:', Screw)
-        Target_Resources.append('Steel_Beam')
-        SB_Target += z * 5
-        z = 0
-        Screw_Target = 0
+        if Screw == 'Screw':
+            if y == Target_Resource:
+                Screw_Target = Target_Resource_Amount
+            results = craft(y, Screw, Screw_Target, 'Iron_Rod', None, None, None, None)
+            IR_Target += results['In1_Target']
+            Screw_Target = 0
+        elif Screw == 'Casted_Screw':
+            if y == Target_Resource:
+                Screw_Target = Target_Resource_Amount
+            results = craft(y, Screw, Screw_Target, 'Iron_Ingot', None, None, None, None)
+            II_Target += results['In1_Target']
+            Screw_Target = 0
+        elif Screw == 'Steel_Screw':
+            if y == Target_Resource:
+                Screw_Target = Target_Resource_Amount
+            results = craft(y, Screw, Screw_Target, 'Steel_Beam', None, None, None, None)
+            SB_Target += results['In1_Target']
+            Screw_Target = 0
     elif y == "Silica": 
-    if Silica == 'Silica':
-        if y == Target_Resource:
-            Silica_Target = Target_Resource_Amount
-        z = Silica_Target / 37.5
-        print(y, ': ', round(z, 2), 'Constructor(s)\nRecipe:', Silica)
-        Target_Resources.append('Raw_Quartz')
-        Raw_Quartz_Target += z * 22.5
-        z = 0
-        Silica_Target = 0
-    elif Silica == 'Alumina_Solution':
-        if y == Target_Resource:
-            Silica_Target = Target_Resource_Amount
-        z = Silica_Target / 50
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Silica)
-        Target_Resources.append('Bauxite')
-        Target_Resources.append('Water')
-        Bauxite_Target += z * 120
-        Water_Target += z * 180
-        Byproducts.append('Alumina_Solution')
-        AS_Target -= z * 120
-        z = 0
-        Silica_Target = 0
-    elif Silica == 'Cheap_Silica':
-        if y == Target_Resource:
-            Silica_Target = Target_Resource_Amount
-        z = Silica_Target / 26.25
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Silica)
-        Target_Resources.append('Raw_Quartz')
-        Target_Resources.append('Limestone')
-        Raw_Quartz_Target += z * 11.25
-        Limestone_Target += z * 18.75
-        z = 0
-        Silica_Target = 0
+        if Silica == 'Silica':
+            if y == Target_Resource:
+                Silica_Target = Target_Resource_Amount
+            results = craft(y, Silica, Silica_Target, 'Raw_Quartz', None, None, None, None)
+            Raw_Quartz_Target += results['In1_Target']
+            Silica_Target = 0
+        elif Silica == 'Alumina_Solution':
+            if y == Target_Resource:
+                Silica_Target = Target_Resource_Amount
+            results = craft(y, Silica, Silica_Target, 'Bauxite', 'Water', None, None, 'Alumina_Solution')
+            Bauxite_Target += results['In1_Target']
+            Water_Target += results['In2_Target']
+            AS_Target -= results['By1_Target']
+            Silica_Target = 0
+        elif Silica == 'Cheap_Silica':
+            if y == Target_Resource:
+                Silica_Target = Target_Resource_Amount
+            results = craft(y, recipe, target, 'Raw_Quartz', 'Limestone', None, None, None)
+            Raw_Quartz_Target += results['In1_Target']
+            Limestone_Target += results['In2_Target']
+            Silica_Target = 0
     elif y == "Smart_Plating": 
-    if Smart_Plating == 'Smart_Plating':
-        if y == Target_Resource:
-            SP_Target = Target_Resource_Amount
-        z = SP_Target / 2
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Smart_Plating)
-        Target_Resources.append('Reinforced_Iron_Plate')
-        Target_Resources.append('Rotor')
-        RIP_Target += z * 2
-        Rotor_Target += z * 2
-        z = 0
-        SP_Target = 0
-    elif Smart_Plating == 'Plastic_Smart_Plating':
-        if y == Target_Resource:
-            SP_Target = Target_Resource_Amount
-        z = SP_Target / 5
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Smart_Plating)
-        Target_Resources.append('Reinforced_Iron_Plate')
-        Target_Resources.append('Rotor')
-        Target_Resources.append('Plastic')
-        RIP_Target += z * 2.5
-        Rotor_Target += z * 2.5
-        Plastic_Target += z * 7.5
-        z = 0
-        SP_Target = 0
+        if Smart_Plating == 'Smart_Plating':
+            if y == Target_Resource:
+                SP_Target = Target_Resource_Amount
+            results = craft(y, Smart_Plating, SP_Target, 'Reinforced_Iron_Plate', 'Rotor', None, None, None)
+            RIP_Target += results['In1_Target']
+            Rotor_Target += results['In2_Target']
+            SP_Target = 0
+        elif Smart_Plating == 'Plastic_Smart_Plating':
+            if y == Target_Resource:
+                SP_Target = Target_Resource_Amount
+            results = craft(y, Smart_Plating, SP_Target, 'Reinforced_Iron_Plate', 'Rotor', 'Plastic', None, None)
+            RIP_Target += results['In1_Target']
+            Rotor_Target += results['In2_Target']
+            Plastic_Target += results['In3_Target']
+            SP_Target = 0
     elif y == "Solid_Biofuel": 
-    if y == Target_Resource:
-        SB_Target = Target_Resource_Amount
-    z = SB_Target / 60
-    print(y, ': ', round(z, 2), 'Constructor(s)')
-    Target_Resources.append('Biomass')
-    Biomass_Target += z * 120
-    z = 0
-    SB_Target = 0
+        if y == Target_Resource:
+            SB_Target = Target_Resource_Amount
+        results = craft(y, y, SB_Target, 'Biomass', None, None, None, None)
+        Biomass_Target += results['In1_Target']
+        SB_Target = 0
     elif y == "Spiked_Rebar": 
-    if y == Target_Resource:
-        SR_Target = Target_Resource_Amount
-    z = SR_Target / 15
-    print(y, ': ', round(z, 2), 'Constructor(s)')
-    Target_Resources.append('Iron_Rod')
-    IR_Target += z * 15
-    z = 0
-    SR_Target = 0
+        if y == Target_Resource:
+            SR_Target = Target_Resource_Amount
+        results = craft(y, y, SR_Target, 'Iron_Rod', None, None, None, None)
+        IR_Target += results['In1_Target']
+        SR_Target = 0
     elif y == "Stator": 
-    if Stator == 'Stator':
-        if y == Target_Resource:
-            Stator_Target = Target_Resource_Amount
-        z = Stator_Target / 5
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Stator)
-        Target_Resources.append('Steel_Pipe')
-        Target_Resources.append('Wire')
-        RIP_Target += z * 15
-        Wire_Target += z * 40
-        z = 0
-        Stator_Target = 0
-    elif Stator == 'Quickwire_Stator':
-        if y == Target_Resource:
-            Stator_Target = Target_Resource_Amount
-        z = Stator_Target / 8
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Stator)
-        Target_Resources.append('Steel_Pipe')
-        Target_Resources.append('Quickwire_Target')
-        RIP_Target += z * 16
-        Quickwire_Target += z * 60
-        z = 0
-        Stator_Target = 0
+        if Stator == 'Stator':
+            if y == Target_Resource:
+                Stator_Target = Target_Resource_Amount
+            results = craft(y, Stator, Stator_Target, 'Steel_Pipe', 'Wire', None, None, None)
+            RIP_Target += results['In1_Target']
+            Wire_Target += results['In2_Target']
+            Stator_Target = 0
+        elif Stator == 'Quickwire_Stator':
+            if y == Target_Resource:
+                Stator_Target = Target_Resource_Amount
+            results = craft(y, Stator, Stator_Target, 'Steel_Pipe', 'Quickwire_Target', None, None, None)
+            RIP_Target += results['In1_Target']
+            Quickwire_Target += results['In2_Target']
+            Stator_Target = 0
     elif y == "Steel_Beam": 
         if y == Target_Resource:
             SB_Target = Target_Resource_Amount
-        z = SB_Target / 15
-        print(y, ': ', round(z, 2), 'Assembler(s)')
-        Target_Resources.append('Steel_Ingot')
-        SI_Target += z * 60
+        results = craft(y, y, SB_Target, 'Steel_Ingot', None, None, None, None)
+        SI_Target += results['In1_Target']
         z = 0
         SB_Target = 0
     elif y == "Steel_Ingot": 
-    if Steel_Ingot == "Steel_Ingot":
-        if y == Target_Resource:
-            SI_Target = Target_Resource_Amount
-        z = SI_Target / 45
-        print(y, ': ', round(z, 2), 'Foundry(s)\nRecipe:', Steel_Ingot)
-        Target_Resources.append('Iron_Ore')
-        Target_Resources.append('Coal')
-        Iron_Ore_Target += z * 45
-        Rotor_Target += z * 45
-        z = 0
-        SI_Target = 0
-    elif Steel_Ingot == "Coke_Steel_Ingot":
-        if y == Target_Resource:
-            SI_Target = Target_Resource_Amount
-        z = SI_Target / 100
-        print(y, ': ', round(z, 2), 'Foundry(s)\nRecipe:', Steel_Ingot)
-        Target_Resources.append('Iron_Ore')
-        Target_Resources.append('Petroleum_Coke')
-        Iron_Ore_Target += z * 75
-        PC_Target += z * 75
-        z = 0
-        SI_Target = 0
-    elif Steel_Ingot == "Compacted_Steel_Ingot":
-        if y == Target_Resource:
-            SI_Target = Target_Resource_Amount
-        z = SI_Target / 37.5
-        print(y, ': ', round(z, 2), 'Foundry(s)\nRecipe:', Steel_Ingot)
-        Target_Resources.append('Iron_Ore')
-        Target_Resources.append('Compacted_Coal')
-        Iron_Ore_Target += z * 22.5
-        Compacted_Coal += z * 11.25
-        z = 0
-        SI_Target = 0
-    elif Steel_Ingot == "Solid_Steel_Ingot":
-        if y == Target_Resource:
-            SI_Target = Target_Resource_Amount
-        z = SI_Target / 60
-        print(y, ': ', round(z, 2), 'Foundry(s)\nRecipe:', Steel_Ingot)
-        Target_Resources.append('Iron_Ingot')
-        Target_Resources.append('Coal')
-        II_Target += z * 40
-        Coal_Target += z * 40
-        z = 0
-        SI_Target = 0
+        if Steel_Ingot == "Steel_Ingot":
+            if y == Target_Resource:
+                SI_Target = Target_Resource_Amount
+            results = craft(y, Steel_Ingot, SI_Target, 'Iron_Ore', 'Coal', None, None, None)
+            Iron_Ore_Target += results['In1_Target']
+            Rotor_Target += results['In2_Target']
+            SI_Target = 0
+        elif Steel_Ingot == "Coke_Steel_Ingot":
+            if y == Target_Resource:
+                SI_Target = Target_Resource_Amount
+            results = craft(y, Steel_Ingot, SI_Target, 'Iron_Ore', 'Petroleum_Coke', None, None, None)
+            Iron_Ore_Target += results['In1_Target']
+            PC_Target += results['In2_Target']
+            SI_Target = 0
+        elif Steel_Ingot == "Compacted_Steel_Ingot":
+            if y == Target_Resource:
+                SI_Target = Target_Resource_Amount
+            results = craft(y, Steel_Ingot, SI_Target, 'Iron_Ore', 'Compacted_Coal', None, None, None)
+            Iron_Ore_Target += results['In1_Target']
+            Compacted_Coal += results['In2_Target']
+            SI_Target = 0
+        elif Steel_Ingot == "Solid_Steel_Ingot":
+            if y == Target_Resource:
+                SI_Target = Target_Resource_Amount
+            results = craft(y, Steel_Ingot, SI_Target, 'Iron_Ingot', 'Coal', None, None, None)
+            II_Target += results['In1_Target']
+            Coal_Target += results['In2_Target']
+            SI_Target = 0
     elif y == "Steel_Pipe": 
-    if y == Target_Resource:
-        SP_Target = Target_Resource_Amount
-    z = SP_Target / 20
-    print(y, ': ', round(z, 2), 'Constructor(s)')
-    Target_Resources.append('Steel_Ingot')
-    SI_Target += z * 30
-    z = 0
-    SP_Target = 0
+        if y == Target_Resource:
+            SP_Target = Target_Resource_Amount
+        results = craft(y, y, SP_Target, 'Steel_Ingot', None, None, None, None)
+        SI_Target += results['In1_Target']
+        SP_Target = 0
     elif y == "Sulfur": 
-    Inputs.append('Sulfur')
+        Inputs.append('Sulfur')
     elif y == "Sulfuric_Acid": 
-    if y == Target_Resource:
-        SA_Target = Target_Resource_Amount
-    z = SA_Target / 50
-    print(y, ': ', round(z, 2), 'Refinery(s)')
-    Target_Resources.append('Sulfur')
-    Target_Resources.append('Water')
-    Sulfur_Target += z * 50
-    Water_Target += z * 50
-    z = 0
-    SA_Target = 0
+        if y == Target_Resource:
+            SA_Target = Target_Resource_Amount
+        results = craft(y, y, SA_Target, 'Sulfur', 'Water', None, None, None)
+        Sulfur_Target += results['In1_Target']
+        Water_Target += results['In2_Target']
+        SA_Target = 0
     elif y == "Supercomputer": 
-    if Supercomputer == 'Supercomputer':
-        if y == Target_Resource:
-            Supercomputer_Target = Target_Resource_Amount
-        z = Supercomputer_Target / 1.875
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Supercomputer)
-        Target_Resources.append('Computer')
-        Target_Resources.append('AI_Limiter')
-        Target_Resources.append('High_Speed_Connector')
-        Target_Resources.append('Plastic')
-        Computer_Target += z * 3.75
-        AIL_Target += z * 3.75
-        HSC_Target += z * 5.625
-        Plastic_Target += z * 52.5
-        z = 0
-        Supercomputer_Target = 0
-    elif Supercomputer == 'OC_Supercomputer':
-        if y == Target_Resource:
-            Supercomputer_Target = Target_Resource_Amount
-        z = Supercomputer_Target / 3
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Supercomputer)
-        Target_Resources.append('Radio_Control_Unit')
-        Target_Resources.append('Cooling_System')
-        RCU_Target += z * 9
-        CSys_Target += z * 9
-        z = 0
-        Supercomputer_Target = 0
-    elif Supercomputer == 'Super_State_Computer':
-        if y == Target_Resource:
-            Supercomputer_Target = Target_Resource_Amount
-        z = Supercomputer_Target / 2.4
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Supercomputer)
-        Target_Resources.append('Computer')
-        Target_Resources.append('Electromagnetic_Control_Rod')
-        Target_Resources.append('Battery')
-        Target_Resources.append('Wire')
-        Computer_Target += z * 3.6
-        AIL_Target += z * 2.4
-        HSC_Target += z * 24
-        Plastic_Target += z * 54
-        z = 0
-        Supercomputer_Target = 0
+        if Supercomputer == 'Supercomputer':
+            if y == Target_Resource:
+                Supercomputer_Target = Target_Resource_Amount
+            results = craft(y, Supercomputer, Supercomputer_Target, 'Computer', 'AI_Limiter', 'High_Speed_Connector', 'Plastic', None)
+            Computer_Target += results['In1_Target']
+            AIL_Target += results['In2_Target']
+            HSC_Target += results['In3_Target']
+            Plastic_Target += results['In4_Target']
+        elif Supercomputer == 'OC_Supercomputer':
+            if y == Target_Resource:
+                Supercomputer_Target = Target_Resource_Amount
+            results = craft(y, Supercomputer, Supercomputer_Target, 'Radio_Control_Unit', 'Cooling_System', None, None, None)
+            RCU_Target += results['In1_Target']
+            CSys_Target += results['In2_Target']
+            Supercomputer_Target = 0
+        elif Supercomputer == 'Super_State_Computer':
+            if y == Target_Resource:
+                Supercomputer_Target = Target_Resource_Amount
+            results = craft(y, Supercomputer, Supercomputer_Target, 'Computer', 'Electromagnetic_Control_Rod', 'Battery', 'Wire', None)
+            Computer_Target += results['In1_Target']
+            AIL_Target += results['In2_Target']
+            HSC_Target += results['In3_Target']
+            Plastic_Target += results['In4_Target']
+            Supercomputer_Target = 0
     elif y == "Thermal_Propulsion_Rocket": 
         if y == Target_Resource:
             TPR_Target = Target_Resource_Amount
-        z = TPR_Target / 1
-        print(y, ': ', round(z, 2), 'Manufacturer(s)')
-        Target_Resources.append('Modular_Engine')
-        Target_Resources.append('Turbo_Motor')
-        Target_Resources.append('Cooling_System')
-        Target_Resources.append('Fused_Modular_Frame')
-        ME_Target += z * 2.5
-        TM_Target += z * 1
-        CSys_Target += z * 3
-        FMF_Target += z * 1
-        z = 0
+        results = craft(y, y, TPR_Target, 'Modular_Engine', 'Turbo_Motor', 'Cooling_System', 'Fused_Modular_Frame', None)
+        ME_Target += results['In1_Target']
+        TM_Target += results['In2_Target']
+        CSys_Target += results['In3_Target']
+        FMF_Target += results['In4_Target']
         TPR_Target = 0
     elif y == "Turbo_Motor": 
-    if Turbo_Motor == 'Turbo_Motor':
-        if y == Target_Resource:
-            TM_Target = Target_Resource_Amount
-        z = TM_Target / 1.875
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Turbo_Motor)
-        Target_Resources.append('Cooling_System')
-        Target_Resources.append('Radio_Control_Unit')
-        Target_Resources.append('Motor')
-        Target_Resources.append('Rubber')
-        CSys_Target += z * 7.5
-        RCU_Target += z * 3.75
-        Motor_Target += z * 7.5
-        Rubber_Target += z * 45
-        z = 0
-        TM_Target = 0
-    elif Turbo_Motor == 'Turbo_Rigour_Motor':
-        if y == Target_Resource:
-            TM_Target = Target_Resource_Amount
-        z = TM_Target / 2.8125
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Turbo_Motor)
-        Target_Resources.append('Motor')
-        Target_Resources.append('Radio_Control_Unit')
-        Target_Resources.append('Electromagnetic_Control_Rod')
-        Target_Resources.append('Rotor')
-        Motor_Target += z * 6.5625
-        RCU_Target += z * 4.6875
-        ECR_Target += z * 6.5625
-        Rotor_Target += z * 8.4375
-        z = 0
-        TM_Target = 0
-    elif Turbo_Motor == 'Turbo_Pressure_Motor':
-        if y == Target_Resource:
-            TM_Target = Target_Resource_Amount
-        z = TM_Target / 3.75
-        print(y, ': ', round(z, 2), 'Manufacturer(s)\nRecipe:', Turbo_Motor)
-        Target_Resources.append('Motor')
-        Target_Resources.append('Pressure_Conversion_Cube')
-        Target_Resources.append('Packaged_Nitrogen_Gas')
-        Target_Resources.append('Stator')
-        Motor_Target += z * 7.5
-        PCC_Target += z * 3.75
-        PNG_Target += z * 56.25
-        Stator_Target += z * 22.5
-        z = 0
-        TM_Target = 0
+        if Turbo_Motor == 'Turbo_Motor':
+            if y == Target_Resource:
+                TM_Target = Target_Resource_Amount
+            results = craft(y, Turbo_Motor, TM_Target, 'Cooling_System', 'Radio_Control_Unit', 'Motor', 'Rubber', None)
+            CSys_Target += results['In1_Target']
+            RCU_Target += results['In2_Target']
+            Motor_Target += results['In3_Target']
+            Rubber_Target += results['In4_Target']
+            TM_Target = 0
+        elif Turbo_Motor == 'Turbo_Rigour_Motor':
+            if y == Target_Resource:
+                TM_Target = Target_Resource_Amount
+            results = craft(y, Turbo_Motor, TM_Target, 'Motor', 'Radio_Control_Unit', 'Electromagnetic_Control_Rod', 'Rotor', None)
+            Motor_Target += results['In1_Target']
+            RCU_Target += results['In2_Target']
+            ECR_Target += results['In3_Target']
+            Rotor_Target += results['In4_Target']
+            TM_Target = 0
+        elif Turbo_Motor == 'Turbo_Pressure_Motor':
+            if y == Target_Resource:
+                TM_Target = Target_Resource_Amount
+            results = craft(y, Turbo_Motor, TM_Target, 'Motor', 'Pressure_Conversion_Cube', 'Packaged_Nitrogen_Gas', 'Stator', None)
+            Motor_Target += results['In1_Target']
+            PCC_Target += results['In2_Target']
+            PNG_Target += results['In3_Target']
+            Stator_Target += results['In4_Target']
+            z = 0
+            TM_Target = 0
     elif y == "Turbofuel": 
-    if Turbofuel == 'Turbofuel':
-        if y == Target_Resource:
-            Turbofuel_Target = Target_Resource_Amount
-        z = Turbofuel_Target / 18.75
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Turbofuel)
-        Target_Resources.append('Fuel')
-        Target_Resources.append('Compacted_Coal')
-        Fuel_Target += z * 22.5
-        Compacted_Coal_Target += z * 15
-        z = 0
-        Turbofuel_Target = 0
-    elif Turbofuel == 'Turbo_Heavy_Fuel':
-        if y == Target_Resource:
-            Turbofuel_Target = Target_Resource_Amount
-        z = Turbofuel_Target / 30
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Turbofuel)
-        Target_Resources.append('Heavy_Oil_Residue')
-        Target_Resources.append('Compacted_Coal')
-        HOR_Target += z * 37.5
-        Compacted_Coal_Target += z * 30
-        z = 0
-        Turbofuel_Target = 0
-    elif Turbofuel == 'Turbo_Blend_Fuel':
-        if y == Target_Resource:
-            Turbofuel_Target = Target_Resource_Amount
-        z = Turbofuel_Target / 45
-        print(y, ': ', round(z, 2), 'Blender(s)\nRecipe:', Turbofuel)
-        Target_Resources.append('Fuel')
-        Target_Resources.append('Heavy_Oil_Residue')
-        Target_Resources.append('Sulfur')
-        Target_Resources.append('Petroleum_Coke')
-        Fuel_Target += z * 15
-        HOR_Target += z * 30
-        Sulfur_Target += z * 22.5
-        PC_Target += z * 22.5
-        z = 0
-        Turbofuel_Target = 0
+        if Turbofuel == 'Turbofuel':
+            if y == Target_Resource:
+                Turbofuel_Target = Target_Resource_Amount
+            results = craft(y, Turbofuel, Turbofuel_Target, 'Fuel', 'Compacted_Coal', None, None, None)
+            Fuel_Target += results['In1_Target']
+            Compacted_Coal_Target += results['In2_Target']
+            Turbofuel_Target = 0
+        elif Turbofuel == 'Turbo_Heavy_Fuel':
+            if y == Target_Resource:
+                Turbofuel_Target = Target_Resource_Amount
+            results = craft(y, Turbofuel, Turbofuel_Target, 'Heavy_Oil_Residue', 'Compacted_Coal', None, None, None)
+            HOR_Target += results['In1_Target']
+            Compacted_Coal_Target += results['In2_Target']
+            Turbofuel_Target = 0
+        elif Turbofuel == 'Turbo_Blend_Fuel':
+            if y == Target_Resource:
+                Turbofuel_Target = Target_Resource_Amount
+            results = craft(y, Turbofuel, Turbofuel_Target, 'Fuel', 'Heavy_Oil_Residue', 'Sulfur', 'Petroleum_Coke', None)
+            Fuel_Target += results['In1_Target']
+            HOR_Target += results['In2_Target']
+            Sulfur_Target += results['In3_Target']
+            PC_Target += results['In4_Target']
+            Turbofuel_Target = 0
     elif y == "Uranium": 
-    Inputs.append('Uranium')
+        Inputs.append('Uranium')
     elif y == "Versatile_Framework": 
-    if Versatile_Framework == 'Versatile_Framework':
-        if y == Target_Resource:
-            VF_Target = Target_Resource_Amount
-        z = VF_Target / 5
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Versatile_Framework)
-        Target_Resources.append('Modular_Frame')
-        Target_Resources.append('Steel_Beam')
-        MF_Target += z * 2.5
-        SB_Target += z * 30
-        z = 0
-        VF_Target = 0
-    elif Versatile_Framework == 'Flexible_Framework':
-        if y == Target_Resource:
-            VF_Target = Target_Resource_Amount
-        z = VF_Target / 7.5
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Versatile_Framework)
-        Target_Resources.append('Modular_Frame')
-        Target_Resources.append('Steel_Beam')
-        Target_Resources.append('Rubber')
-        MF_Target += z * 3.75
-        SB_Target += z * 22.5
-        Rubber_Target += z * 30
-        z = 0
-        VF_Target = 0
+        if Versatile_Framework == 'Versatile_Framework':
+            if y == Target_Resource:
+                VF_Target = Target_Resource_Amount
+            results = craft(y, Versatile_Framework, VF_Target, 'Modular_Frame', 'Steel_Beam', None, None, None)
+            MF_Target += results['In1_Target']
+            SB_Target += results['In2_Target']
+            VF_Target = 0
+        elif Versatile_Framework == 'Flexible_Framework':
+            if y == Target_Resource:
+                VF_Target = Target_Resource_Amount
+            results = craft(y, Versatile_Framework, VF_Target, 'Modular_Frame', 'Steel_Beam', 'Rubber', None, None)
+            MF_Target += results['In1_Target']
+            SB_Target += results['In2_Target']
+            Rubber_Target += results['In3_Target']
+            VF_Target = 0
     elif y == "Water": 
-    Inputs.append('Water')
+        Inputs.append('Water')
     elif y == "Wire": 
-    if Wire == 'Wire':
-        if y == Target_Resource:
-            Wire_Target = Target_Resource_Amount
-        z = Wire_Target / 30
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Wire)
-        Target_Resources.append('Copper_Ingot')
-        CopI_Target += z * 15
-        z = 0
-        Wire_Target = 0
-    elif Wire == 'Fused_Wire':
-        if y == Target_Resource:
-            Wire_Target = Target_Resource_Amount
-        z = Wire_Target / 90
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Wire)
-        Target_Resources.append('Copper_Ingot')
-        Target_Resources.append('Caterium_Ingot')
-        CopI_Target += z * 12
-        CatI_Target += z * 3
-        z = 0
-        Wire_Target = 0
-    elif Wire == 'Iron_Wire':
-        if y == Target_Resource:
-            Wire_Target = Target_Resource_Amount
-        z = Wire_Target / 22.5
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Wire)
-        Target_Resources.append('Iron_Ingot')
-        II_Target += z * 12.5
-        z = 0
-        Wire_Target = 0
-    elif Wire == 'Caterium_Wire':
-        if y == Target_Resource:
-            Wire_Target = Target_Resource_Amount
-        z = Wire_Target / 120
-        print(y, ': ', round(z, 2), 'Assembler(s)\nRecipe:', Wire)
-        Target_Resources.append('Caterium_Ingot')
-        CatI_Target += z * 15
-        z = 0
-        Wire_Target = 0
+        if Wire == 'Wire':
+            if y == Target_Resource:
+                Wire_Target = Target_Resource_Amount
+            results = craft(y, Wire, Wire_Target, 'Copper_Ingot', None, None, None, None)
+            CopI_Target += results['In1_Target']
+            Wire_Target = 0
+        elif Wire == 'Fused_Wire':
+            if y == Target_Resource:
+                Wire_Target = Target_Resource_Amount
+            results = craft(y, Wire, Wire_Target, 'Copper_Ingot', 'Caterium_Ingot', None, None, None)
+            CopI_Target += results['In1_Target']
+            CatI_Target += results['In2_Target']
+            Wire_Target = 0
+        elif Wire == 'Iron_Wire':
+            if y == Target_Resource:
+                Wire_Target = Target_Resource_Amount
+            results = craft(y, Wire, Wire_Target, 'Iron_Ingot', None, None, None, None)
+            II_Target += results['In1_Target']
+            Wire_Target = 0
+        elif Wire == 'Caterium_Wire':
+            if y == Target_Resource:
+                Wire_Target = Target_Resource_Amount
+            results = craft(y, Wire, Wire_Target, 'Caterium_Ingot', None, None, None, None)
+            CatI_Target += results['In1_Target']
+            Wire_Target = 0
     elif y == "Wood":
-    Inputs.append('Wood')
+        Inputs.append('Wood')
     else:
-    print('Failed to find recipie for item:', y, '\n Please contact creator')
+        print('Failed to find recipie for item:', y, '\n Please contact creator')
 
 
 print('Inputs:')
 for item in Inputs:
-  print('\n')
-  if item == "Alien_Carapace":
-    print(item, ': ', Alien_Carapace_Target)
-  elif item == "Alien_Organs":
-    print(item, ': ', Alien_Organs_Target)
-  elif item == "Bauxite":
-    print(item, ': ', Bauxite_Target)
-  elif item == "Caterium_Ore":
-    print(item, ': ', Caterium_Ore_Target)
-  elif item == "Coal":
-    print(item, ': ', Coal_Target)
-  elif item == 'Copper_Ore':
-    print(item, ': ', Copper_Ore_Target)
-  elif item == 'Crude_Oil':
-    print(item, ': ', Crude_Oil_Target)
-  elif item == 'Flower_Petals':
-    print(item, ': ', Flower_Petals_Target)
-  elif item == 'Iron_Ore':
-    print(item, ': ', Iron_Ore_Target)
-  elif item == 'Leaves':
-    print(item, ': ', Leaves_Target)
-  elif item == 'Limestone':
-    print(item, ': ', Limestone_Target)
-  elif item == 'Mycelia':
-    print(item, ': ', Mycelia_Target)
-  elif item == 'Nitrogen_Gas':
-    print(item, ': ', Nitrogen_Gas_Target)
-  elif item == 'Raw_Quartz':
-    print(item, ': ', Raw_Quartz_Target)
-  elif item == 'Sulfur':
-    print(item, ': ', Sulfur_Target)
-  elif item == 'Uranium':
-    print(item, ': ', Uranium_Target)
-  elif item == 'Water':
-    print(item, ': ', Water_Target)
-  elif item == 'Wood':
-    print(item, ': ', Wood_Target)
-  else:
+    print('\n')
+    if item == "Alien_Carapace":
+        print(item, ': ', Alien_Carapace_Target)
+    elif item == "Alien_Organs":
+        print(item, ': ', Alien_Organs_Target)
+    elif item == "Bauxite":
+        print(item, ': ', Bauxite_Target)
+    elif item == "Caterium_Ore":
+        print(item, ': ', Caterium_Ore_Target)
+    elif item == "Coal":
+        print(item, ': ', Coal_Target)
+    elif item == 'Copper_Ore':
+        print(item, ': ', Copper_Ore_Target)
+    elif item == 'Crude_Oil':
+        print(item, ': ', Crude_Oil_Target)
+    elif item == 'Flower_Petals':
+        print(item, ': ', Flower_Petals_Target)
+    elif item == 'Iron_Ore':
+        print(item, ': ', Iron_Ore_Target)
+    elif item == 'Leaves':
+        print(item, ': ', Leaves_Target)
+    elif item == 'Limestone':
+        print(item, ': ', Limestone_Target)
+    elif item == 'Mycelia':
+        print(item, ': ', Mycelia_Target)
+    elif item == 'Nitrogen_Gas':
+        print(item, ': ', Nitrogen_Gas_Target)
+    elif item == 'Raw_Quartz':
+        print(item, ': ', Raw_Quartz_Target)
+    elif item == 'Sulfur':
+        print(item, ': ', Sulfur_Target)
+    elif item == 'Uranium':
+        print(item, ': ', Uranium_Target)
+    elif item == 'Water':
+        print(item, ': ', Water_Target)
+    elif item == 'Wood':
+        print(item, ': ', Wood_Target)
+    else:
      print('Mistake:', item, 'has not been added to input list, please contact creator')
-
+    Inputs.remove(item)
 
 
 print('Byproducts:')
 for item in Byproducts:
-  print('\n')
-  if item == 'Silica':
-    print('Silica Byproduct:', abs(Silica_Target))
-    Silica_Target = 0
-  elif item == 'Water':
-    print('Water Byproduct:', abs(Water_Target))
-    Water_Target = 0
-  elif item == 'Polymer_Resin':
-    print('Polymer Resin Byproduct:', abs(PR_Target))
-  elif item == 'Heavy_Oil_Residue':
-    print('Heavy Oil Residue Byproduct:', abs(HOR_Target))
-  elif item == 'Fuel':
-    print('Fuel Byproduct:', abs(Fuel_Target))
-  else:
-    print('Mistake:', item, 'has not been added to byproduct list, please contact creator')
-
-print(Target_Resources)
+    print('\n')
+    if item == 'Silica':
+        print('Silica Byproduct:', abs(Silica_Target))
+    elif item == 'Water':
+        print('Water Byproduct:', abs(Water_Target))
+    elif item == 'Polymer_Resin':
+        print('Polymer Resin Byproduct:', abs(PR_Target))
+    elif item == 'Heavy_Oil_Residue':
+        print('Heavy Oil Residue Byproduct:', abs(HOR_Target))
+    elif item == 'Fuel':
+        print('Fuel Byproduct:', abs(Fuel_Target))
+    else:
+        print('Mistake:', item, 'has not been added to byproduct list, please contact creator')
+    Byproducts.remove(item)
