@@ -1253,7 +1253,7 @@ for y in Target_Resources:
         if Plutonium_Fuel_Rod == 'Plutonium_Fuel_Rod':
             if y == Target_Resource:
                 PFR_Target = Target_Resource_Amount
-            results = craft(y, recipe, target, 'Encased_Plutonium_Cell', 'Steel_Beam', 'Electromagnetic_Control_Rod', 'Heat_Sink', None)
+            results = craft(y, Plutonium_Fuel_Rod, PFR_Target, 'Encased_Plutonium_Cell', 'Steel_Beam', 'Electromagnetic_Control_Rod', 'Heat_Sink', None)
             EPC_Target += results['In1_Target']
             SB_Target += results['In2_Target']
             ECR_Target += results['In3_Target']
@@ -1262,74 +1262,62 @@ for y in Target_Resources:
         elif Plutonium_Fuel_Rod == 'Plutonium_Fuel_Unit':
             if y == Target_Resource:
                 PFR_Target = Target_Resource_Amount
+            results = craft(y, Plutonium_Fuel_Rod, PFR_Target, 'Encased_Plutonium_Cell', 'Pressure_Conversion_Cube', None, None, None)
+            EPC_Target += results['In1_Target']
+            PCC_Target += results['In2_Target']
+            PFR_Target = 0
+    elif y == "Plutonium_Pellets": 
+        if y == Target_Resource:
+            PP_Target = Target_Resource_Amount
+        results = craft(y, y, PP_Target, 'Non_Fissile_Uranium', 'Nuclear_Waste', None, None, None)
+        NFU_Target += results['In1_Target']
+        NW_Target += results['In2_Target']
+        PP_Target = 0
+    elif y == "Plutonium_Waste": 
+        if y == Target_Resource:
+            PW_Target = Target_Resource_Amount
+        results = craft(y, y, PW_Target, 'Plutonium_Fuel_Rod', 'Water', None, None, None)
+        PFR_Target += results['In1_Target']
+        Water_Target += results['In2_Target']
+        PW_Target = 0
+    elif y == "Polymer_Resin": 
+        if Polymer_Resin == 'Fuel':
+            if y == Target_Resource:
+                PR_Target= Target_Resource_Amount
+            results = craft(y, Polymer_Resin, target, 'Crude_Oil', None, None, None, 'Fuel')
+            Crude_Oil_Target += results['In1_Target']
+            Fuel_Target -= results['By1_Target']
+            PR_Target = 0
+        elif Polymer_Resin == 'Polymer_Resin':
+            if y == Target_Resource:
+                PR_Target= Target_Resource_Amount
             results = craft(y, recipe, target, None, None, None, None, None)
              += results['In1_Target']
              += results['In2_Target']
              += results['In3_Target']
              += results['In4_Target']
-             -= results['By1_Target'])
-            Target_Resources.append('Encased_Plutonium_Cell')
-            Byproducts.append('Pressure_Conversion_Cube')
-            EPC_Target += z * 10
-            PCC_Target += z * 1
+             -= results['By1_Target']
+            Target_Resources.append('Crude_Oil')
+            Byproducts.append('Heavy_Oil_Residue')
+            Crude_Oil_Target += z * 60 
+            HOR_Target -= z * 20
             z = 0
-            PFR_Target = 0
-    elif y == "Plutonium_Pellets": 
-    if y == Target_Resource:
-        PFR_Target = Target_Resource_Amount
-    z = PFR_Target / 30
-    print(y, ': ', round(z, 2), 'Particle Accelerator(s)')
-    Target_Resources.append('Non_Fissile_Uranium')
-    Byproducts.append('Nuclear_Waste')
-    NFU_Target += z * 100
-    NW_Target += z * 50
-    z = 0
-    PFR_Target = 0
-    elif y == "Plutonium_Waste": 
-    if y == Target_Resource:
-        PW_Target = Target_Resource_Amount
-    z = PW_Target / 2
-    print(y, ': ', round(z, 2), 'Nuclear Power Plant(s)')
-    Target_Resources.append('Plutonium_Fuel_Rod')
-    Target_Resources.append('Water')       
-    PFR_Target += z * 0.4
-    Water_Target += z * 300
-    z = 0
-    PW_Target = 0
-    elif y == "Polymer_Resin": 
-    if Polymer_Resin == 'Fuel':
-        if y == Target_Resource:
-            PR_Target= Target_Resource_Amount
-        z = PR_Target / 30
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Polymer_Resin)
-        Target_Resources.append('Crude_Oil')
-        Byproducts.append('Fuel')
-        Crude_Oil_Target += z * 60 
-        Fuel_Target -= z * 40
-        z = 0
-        PR_Target = 0
-    elif Polymer_Resin == 'Polymer_Resin':
-        if y == Target_Resource:
-            PR_Target= Target_Resource_Amount
-        z = PR_Target / 130
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Polymer_Resin)
-        Target_Resources.append('Crude_Oil')
-        Byproducts.append('Heavy_Oil_Residue')
-        Crude_Oil_Target += z * 60 
-        HOR_Target -= z * 20
-        z = 0
-        PR_Target = 0
-    elif Polymer_Resin == 'Heavy_Oil_Residue':
-        if y == Target_Resource:
-            PR_Target= Target_Resource_Amount
-        z = PR_Target / 20
-        print(y, ': ', round(z, 2), 'Refinery(s)\nRecipe:', Polymer_Resin)
-        Target_Resources.append('Crude_Oil')
-        Byproducts.append('Heavy_Oil_Residue')
-        Crude_Oil_Target += z * 30 
-        HOR_Target -= z * 40
-        z = 0
-        PR_Target = 0
+            PR_Target = 0
+        elif Polymer_Resin == 'Heavy_Oil_Residue':
+            if y == Target_Resource:
+                PR_Target= Target_Resource_Amount
+            results = craft(y, recipe, target, None, None, None, None, None)
+             += results['In1_Target']
+             += results['In2_Target']
+             += results['In3_Target']
+             += results['In4_Target']
+             -= results['By1_Target']
+            Target_Resources.append('Crude_Oil')
+            Byproducts.append('Heavy_Oil_Residue')
+            Crude_Oil_Target += z * 30 
+            HOR_Target -= z * 40
+            z = 0
+            PR_Target = 0
     elif y == "Pressure_Conversion_Cube": 
     if y == Target_Resource:
         PCC_Target = Target_Resource_Amount
