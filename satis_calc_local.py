@@ -3,10 +3,10 @@
 import pandas as pd
 import numpy as np
 import time
-save_location = ''
+save_location = ""
 # an example location would be something like this for wsl ubuntu( you want it to save to the folder that you've probably got this script saved to, so you know it has the appropriate write permissions): /mnt/c/Users/(username)/Documents/GitHub/satisfactory-calc-personal/Calculator_Output.csv
 # the /Calculator_Output.csv will be the file name (Calculator_Output.csv) you an change the name if you want it named differently, but not the extension part (.csv) 
-# for windows, the save_location would be like as follows: C:\Users\(username)Documents\GitHub\satisfactory-calc-personal\Calculator_Output.csv
+# for windows, the save_location would be like as follows: C:\Users\<username>\Documents\GitHub\satisfactory-calc-personal\Calculator_Output.csv
 recipes_url = 'https://raw.githubusercontent.com/JazzManToo/satisfactory-calc-personal/main/Data/Satisfactory%20every%20recipe.csv'
 print('will attempt to save CSV (output) to:',save_location)
 val = str(input('Is that okay? (y/n)'))
@@ -2348,4 +2348,4 @@ for item in Byproducts:
   Byproducts.remove(item)
 table2 = table2.drop_duplicates(ignore_index=True)
 print(table2)
-table2.to_csv('/mnt/c/Users/gavin/OneDrive/Documents/GitHub/satisfactory-calc-personal/Calculator_Output.csv')
+table2.to_csv(save_location)
