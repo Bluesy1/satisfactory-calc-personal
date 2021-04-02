@@ -14,12 +14,17 @@ val = str(input('Is that okay? (y/n)'))
 table = pd.read_csv(recipes_url, index_col= 'Recipe')
 table2 = pd.DataFrame()
 def craft(item, recipe, Target, In1, In2, In3, In4, By1):
-    x = Target / float(table.loc[recipe, item])
+    if isinstance(Target,float):
+        x = Target / float(table.loc[recipe, item])
+    else:
+        x = float(Target[0]) / float(table.loc[recipe, item])
     In1_Target = 0 
     In2_Target = 0
     In3_Target = 0
     In4_Target = 0 
     By1_Target = 0
+    # print(Target, '\n spacer\n Type:', type(Target), '\n spacer')
+    # print(float(table.loc[recipe, item]), '\n spacer Type:', type(float(table.loc[recipe, item])), '\n spacer')
     if In1 != None:
       In1_Target = x * abs(table.loc[recipe, In1])
       if In1 in Target_Resources:
@@ -48,6 +53,9 @@ def craft(item, recipe, Target, In1, In2, In3, In4, By1):
     # if CSV_Output:
     resultsDict = {'Recipe': recipe, 'Building': table.loc[recipe, 'Building'], 'Amount of Buliding(s)': x, 'Input 1': In1, 'Amount of Input 1': In1_Target, 'Input 2': In2, 'Amount of Input 2': In2_Target, 'Input 3': In3, 'Amount of Input 3': In3_Target, 'Input 4': In4, 'Amount of Input 4': In4_Target, 'Byproduct': By1, 'Amount of Byproduct': By1_Target}
     resultstable = pd.DataFrame(resultsDict, index= ['Recipe', 'Building', 'AmountofBuliding(s)', 'Input1', 'AmountofInput1', 'Input2', 'AmountofInput2', 'Input3', 'AmountofInput3', 'Input4', 'AmountofInput4', 'Byproduct', 'AmountofByproduct'])
+    resultstable = resultstable.iloc[[0]]
+    print(item, ': ', round(x, 2), resultstable.loc['Recipe', 'Building'], '(s)\nRecipe:', recipe)
+    # print(resultstable)
     return resultstable
 if val == "y":
     print('Great, Starting now')
@@ -2328,24 +2336,49 @@ table2 = table2.append(pd.DataFrame({'Recipe': 'Wood', 'Building': Wood_Target},
 # else:
 #   print('Mistake:', item, 'has not been added to input list, please contact creator')
 # Inputs.remove(item)
+print('Inputs:')
+print('Alien_Carapace: ', Alien_Carapace_Target)
+print('Alien_Organs: ', Alien_Organs_Target)
+print('Bauxite: ', Bauxite_Target)
+print('Caterium_Ore: ', Caterium_Ore_Target)
+print('Coal: ', Coal_Target)
+print('Copper_Ore: ', Copper_Ore_Target)
+print('Crude_Oil: ', Crude_Oil_Target)
+print('Flower_Petals: ', Flower_Petals_Target)
+print('Iron_Ore: ', Iron_Ore_Target)
+print('Leaves: ', Leaves_Target)
+print('Limestone: ', Limestone_Target)
+print('Mycelia: ', Mycelia_Target)
+print('Nitrogen_Gas: ', Nitrogen_Gas_Target)
+print('Raw_Quartz: ', Raw_Quartz_Target)
+print('Sulfur: ', Sulfur_Target)
+print('Uranium: ', Uranium_Target)
+print('Water: ', Water_Target)
+print('Wood: ', Wood_Target)
 
-
+print('Byproducts:')
 table2 = table2.append(pd.DataFrame({'Recipe': 'Byproducts', 'Building': 'Byproducts', 'Amount of Buliding(s)': 'Byproducts', 'Input 1': 'Byproducts', 'Amount of Input 1': 'Byproducts', 'Input 2': 'Byproducts', 'Amount of Input 2': 'Byproducts', 'Input 3': 'Byproducts', 'Amount of Input 3': 'Byproducts', 'Input 4': 'Byproducts', 'Amount of Input 4': 'Byproducts', 'Byproduct': 'Byproducts', 'Amount of Byproduct': 'Byproducts'}, index = ['Recipe', 'Building', 'AmountofBuliding(s)', 'Input1', 'AmountofInput1', 'Input2', 'AmountofInput2', 'Input3', 'AmountofInput3', 'Input4', 'AmountofInput4', 'Byproduct', 'AmountofByproduct']), ignore_index = True)
 for item in Byproducts:
   print('\n')
-  if item == 'Silica':
+  if item == 'Silica' and float(Silica_Target) < 0:
       table2 = table2.append(pd.DataFrame({'Recipe': 'Silica Byproduct', 'Building': abs(Silica_Target)}, index = ['Recipe', 'Building']), ignore_index = True)
-  elif item == 'Water':
+      print('Silica Byproduct:', abs(Silica_Target))
+  elif item == 'Water' and float(Water_Target) < 0:
       table2 = table2.append(pd.DataFrame({'Recipe': 'Water Byproduct', 'Building': abs(Water_Target)}, index = ['Recipe', 'Building']), ignore_index = True)
-  elif item == 'Polymer_Resin':
+      print('Water Byproduct:', abs(Water_Target))
+  elif item == 'Polymer_Resin' and float(PR_Target) < 0:
       table2 = table2.append(pd.DataFrame({'Recipe': 'Polymer Resin Byproduct', 'Building': abs(PR_Target)}, index = ['Recipe', 'Building']), ignore_index = True)
-  elif item == 'Heavy_Oil_Residue':
+      print('Polymer Resin Byproduct:', abs(PR_Target))
+  elif item == 'Heavy_Oil_Residue' and float(HOR_Target) < 0:
       table2 = table2.append(pd.DataFrame({'Recipe': 'Heavy Oil Residue Byproduct', 'Building': abs(HOR_Target)}, index = ['Recipe', 'Building']), ignore_index = True)
-  elif item == 'Fuel':
+      print('Heavy Oil Residue Byproduct:', abs(HOR_Target))
+  elif item == 'Fuel' and float(Fuel_Target) < 0:
       table2 = table2.append(pd.DataFrame({'Recipe': 'Fuel Byproduct', 'Building': abs(Fuel_Target)}, index = ['Recipe', 'Building']), ignore_index = True)
+      print('Fuel Byproduct:', abs(Fuel_Target))
   else:
       print('Mistake:', item, 'has not been added to byproduct list, please contact creator')
   Byproducts.remove(item)
 table2 = table2.drop_duplicates(ignore_index=True)
+table2 = table2.dropna(subset=['Building'])
 print(table2)
 table2.to_csv(save_location)
