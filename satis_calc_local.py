@@ -1,8 +1,8 @@
 # print('Initializing')
-
 import pandas as pd
 import numpy as np
 import time
+import sys
 save_location = ""
 # an example location would be something like this for wsl ubuntu( you want it to save to the folder that you've probably got this script saved to, so you know it has the appropriate write permissions): /mnt/c/Users/(username)/Documents/GitHub/satisfactory-calc-personal/Calculator_Output.csv
 # the /Calculator_Output.csv will be the file name (Calculator_Output.csv) you an change the name if you want it named differently, but not the extension part (.csv) 
@@ -60,7 +60,7 @@ def craft(item, recipe, Target, In1, In2, In3, In4, By1):
 if val == "y":
     print('Great, Starting now')
 elif val == 'n':
-    print('Quitting program, please update string on line 4 (save_location) with the proper string')
+    print('Quitting program, please update string on line 6 (save_location) with the proper string')
     time.sleep(1)
     quit()
 valid_inputs = ["Adaptive_Control_Unit", "AI_Limiter", "Alclad_Aluminum_Sheet",  "Alumina_Solution", "Aluminum_Casing", "Aluminum_Ingot", "Aluminum_Scrap", "Assembly_Director_System", "Automated_Wiring", "Battery", "Beacon", "Biomass", "Black_Powder", "Cable", "Caterium_Ingot", "Caterium_Ore", "Circuit_Board", "Coal", "Color_Cartridge", "Compacted_Coal", "Computer", "Concrete", "Cooling_System", "Copper_Ingot", "Copper_Powder", "Copper_Sheet",  "Crystal_Oscillator", "Electromagnetic_Control_Rod", "Empty_Canister", "Empty_Fluid_Tank", "Encased_Industrial_Beam", "Encased_Plutonium_Cell", "Encased_Uranium_Cell", "Fabric", "Flower_Petals", "Fuel", "Fused_Modular_Frame", "Gas_Filter", "Heat_Sink", "Heavy_Modular_Frame", "Heavy_Oil_Residue", "High_Speed_Connector", "Iodine_Infused_Filter", "Iron_Ingot", "Iron_Plate", "Iron_Rod", "Liquid_Biofuel", "Magnetic_Field_Generator", "Modular_Engine", "Modular_Frame", "Motor", "Mycelia", "Nitric_Acid", "Nitrogen_Gas", "Nobelisk", "Non_Fissile_Uranium", "Nuclear_Fuel_Rod", "Nuclear_Pasta", "Nuclear_Waste", "Packaged_Alumina_Solution", "Packaged_Fuel", "Packaged_Heavy_Oil_Residue", "Packaged_Liquid_Biofuel", "Packaged_Nitric_Acid", "Packaged_Nitrogen_Gas", "Packaged_Oil", "Packaged_Sulfuric_Acid", "Packaged_Turbofuel", "Packaged_Water", "Petroleum_Coke", "Plastic", "Plutonium_Fuel_Rod", "Plutonium_Pellets", "Plutonium_Waste", "Polymer_Resin", "Pressure_Conversion_Cube", "Quartz_Crystal", "Quickwire", "Radio_Control_Unit", "Reinforced_Iron_Plate", "Rifle_Cartridge", "Rotor", "Rubber", "Screw", "Silica", "Smart_Plating", "Solid_Biofuel", "Spiked_Rebar", "Stator", "Steel_Beam", "Steel_Ingot", "Steel_Pipe", "Sulfuric_Acid", "Supercomputer", "Thermal_Propulsion_Rocket", "Turbo_Motor", "Turbofuel", "Versatile_Framework", "Wire"]
@@ -72,8 +72,10 @@ while n < len(valid_inputs):
        Target_Resource = valid_inputs[n]
        break
     n += 1
-Target_Resource_Amount = float(input('Target amount?'))
-
+try:
+    Target_Resource_Amount = float(input('Target amount?'))
+except ValueError:
+    sys.exit('Error: Target amount must be a positive number, with no letters')
 ACU_Target = 0
 AIL_Target = 0
 AAS_Target = 0 
