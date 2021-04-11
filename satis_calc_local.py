@@ -965,10 +965,9 @@ for y in Target_Resources:
             print('Output sulfuric acid from this recipie:', 10 * EUC_Target / 25)
             EUC_Target = 0
         elif Encased_Uranium_Cell == 'Infused_Uranium_Cell':
-            print('Infused_Uranium_Cell may be incorrect, currently uses no uranium .-.')
             if y == Target_Resource:
                 EUC_Target= Target_Resource_Amount
-            results = craft(y, Encased_Uranium_Cell, EUC_Target, 'Silica', 'Sulfur', 'Quickwire', None, None)
+            results = craft(y, Encased_Uranium_Cell, EUC_Target, 'Uranium', 'Silica', 'Sulfur', 'Quickwire', None, None)
             Silica_Target += results['Amount of Input 1']
             Sulfur_Target += results['Amount of Input 2']
             Quickwire_Target += results['Amount of Input 3']
