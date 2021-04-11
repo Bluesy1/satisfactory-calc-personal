@@ -283,7 +283,7 @@ for y in Target_Resources:
         if Aluminum_Ingot == "Aluminum_Ingot":
             if y == Target_Resource:
                 AI_Target = Target_Resource_Amount
-            results = craft(y, Aluminum_Ingot, AI_Limiter, 'Aluminum_Scrap', 'Silica', None, None, None)
+            results = craft(y, Aluminum_Ingot, AI_Target, 'Aluminum_Scrap', 'Silica', None, None, None)
             ASc_Target += results['Amount of Input 1']
             Silica_Target += results['Amount of Input 2']
             AI_Target = 0
@@ -530,7 +530,7 @@ for y in Target_Resources:
         elif Cable == "Quickwire_Cable":
             if y == Target_Resource:
                 Cable_Target = Target_Resource_Amount
-            results = craft(y, recipe, ACU_Target, 'Quickwire', 'Rubber', None, None, None)
+            results = craft(y, Cable, ACU_Target, 'Quickwire', 'Rubber', None, None, None)
             Quickwire_Target += results['Amount of Input 1']
             Rubber_Target += results['Amount of Input 2']
             Cable_Target = 0
@@ -630,13 +630,13 @@ for y in Target_Resources:
     elif y == "Color_Cartridge": 
         if y == Target_Resource:
             Color_Cartridge_Target = Target_Resource_Amount
-        results = craft(y, Color_Cartridge, Color_Cartridge_Target, 'Flower_Petals', None, None, None, None)
+        results = craft(y, 'Color_Cartridge', Color_Cartridge_Target, 'Flower_Petals', None, None, None, None)
         Flower_Petals_Target += results['Amount of Input 1']
         Color_Cartridge_Target = 0
     elif y == "Compacted_Coal": 
         if y == Target_Resource:
             Compacted_Coal_Target = Target_Resource_Amount
-        results = craft(y, recipe, ACU_Target, 'Coal', 'Sulfur', None, None, None)
+        results = craft(y, 'Compacted_Coal', ACU_Target, 'Coal', 'Sulfur', None, None, None)
         Coal_Target += results['Amount of Input 1']
         Sulfur_Target += results['Amount of Input 2']
         Compacted_Coal_Target = 0
@@ -739,7 +739,7 @@ for y in Target_Resources:
         elif Cooling_System == "Cooling_Device":
             if y == Target_Resource:
                 CSys_Target = Target_Resource_Amount
-            results = craft(y, recipe, ACU_Target, 'Heat_Sink', 'Motor', 'Nitrogen_Gas', None, None)
+            results = craft(y, Cooling_System, ACU_Target, 'Heat_Sink', 'Motor', 'Nitrogen_Gas', None, None)
             HS_Target += results['Amount of Input 1']
             Motor += results['Amount of Input 2']
             Nitrogen_Gas_Target += results['Amount of Input 3']
@@ -830,7 +830,7 @@ for y in Target_Resources:
         elif Crystal_Oscillator == 'Insulated_Crystal_Oscillator':
             if y == Target_Resource:
                 COsc_Target= Target_Resource_Amount
-            results = craft(y, recipe, ACU_Target, 'Quartz_Crystal', 'Rubber', 'AI_Limiter', None, None)
+            results = craft(y, Crystal_Oscillator, ACU_Target, 'Quartz_Crystal', 'Rubber', 'AI_Limiter', None, None)
             QCrystal_Target += results['Amount of Input 1']
             Rubber_Target += results['Amount of Input 2']
             AIL_Target += results['Amount of Input 3']
@@ -893,7 +893,7 @@ for y in Target_Resources:
     elif y == "Empty_Fluid_Tank": 
         if y == Target_Resource:
             EFT_Target= Target_Resource_Amount
-        results = craft(y, Empty_Fluid_Tank, EFT_Target, 'Aluminum_Ingot', None, None, None, None)
+        results = craft(y, 'Empty_Fluid_Tank', EFT_Target, 'Aluminum_Ingot', None, None, None, None)
         AI_Target += results['Amount of Input 1']
         EFT_Target = 0
     elif y == "Encased_Industrial_Beam": 
@@ -967,7 +967,7 @@ for y in Target_Resources:
         elif Encased_Uranium_Cell == 'Infused_Uranium_Cell':
             if y == Target_Resource:
                 EUC_Target= Target_Resource_Amount
-            results = craft(y, Encased_Uranium_Cell, EUC_Target, 'Uranium', 'Silica', 'Sulfur', 'Quickwire', None, None)
+            results = craft(y, Encased_Uranium_Cell, EUC_Target, 'Uranium', 'Silica', 'Sulfur', 'Quickwire', None)
             Silica_Target += results['Amount of Input 1']
             Sulfur_Target += results['Amount of Input 2']
             Quickwire_Target += results['Amount of Input 3']
@@ -1212,8 +1212,8 @@ for y in Target_Resources:
             HSC_Target = 0
     elif y == "Iodine_Infused_Filter": 
         if y == Target_Resource:
-            IIF_Target= Target_Resource_Amount
-        results = craft(y, Iodine_Infused_Filter, IIF_Target, 'Gas_Filter', 'Quickwire', 'Aluminum_Casing', None, None)
+            IIF_Target= 'Target_Resource_Amount'
+        results = craft(y, 'Iodine_Infused_Filter', IIF_Target, 'Gas_Filter', 'Quickwire', 'Aluminum_Casing', None, None)
         GF_Target += results['Amount of Input 1']
         Quickwire_Target += results['Amount of Input 2']
         AC_Target += results['Amount of Input 3']
@@ -1476,18 +1476,18 @@ for y in Target_Resources:
         else:
             print('Invalid, quitting out')
             quit()
-        if Nuclear_Fuel_Rod == 'Uranium_Fuel_Rod':
+        if Uranium_Fuel_Rod == 'Uranium_Fuel_Rod':
             if y == Target_Resource:
                 NFR_Target= Target_Resource_Amount
-            results = craft(y, Nuclear_Fuel_Rod, NFR_Target, 'Encased_Uranium_Cell', 'Encased_Industrial_Beam', 'Electromagnetic_Control_Rod', None, None)
+            results = craft(y, Uranium_Fuel_Rod, NFR_Target, 'Encased_Uranium_Cell', 'Encased_Industrial_Beam', 'Electromagnetic_Control_Rod', None, None)
             EUC_Target += results['Amount of Input 1']
             EIB_Target += results['Amount of Input 2']
             ECR_Target += results['Amount of Input 3']
             NFR_Target = 0
-        elif Nuclear_Fuel_Rod == 'Nuclear_Fuel_Unit':
+        elif Uranium_Fuel_Rod == 'Nuclear_Fuel_Unit':
             if y == Target_Resource:
                 NFR_Target= Target_Resource_Amount
-            results = craft(y, Nuclear_Fuel_Rod, NFR_Target, 'Encased_Uranium_Cell', 'Electromagnetic_Control_Rod', 'Crystal_Oscillator', 'Beacon', None)
+            results = craft(y, Uranium_Fuel_Rod, NFR_Target, 'Encased_Uranium_Cell', 'Electromagnetic_Control_Rod', 'Crystal_Oscillator', 'Beacon', None)
             EUC_Target += results['Amount of Input 1']
             ECR_Target += results['Amount of Input 2']
             COsc_Target += results['Amount of Input 3']
@@ -1688,21 +1688,21 @@ for y in Target_Resources:
         if Polymer_Resin == 'Fuel':
             if y == Target_Resource:
                 PR_Target= Target_Resource_Amount
-            results = craft(y, Polymer_Resin, Target, 'Crude_Oil', None, None, None, 'Fuel')
+            results = craft(y, Polymer_Resin, PR_Target, 'Crude_Oil', None, None, None, 'Fuel')
             Crude_Oil_Target += results['Amount of Input 1']
             Fuel_Target -= results['Amount of Byproduct']
             PR_Target = 0
         elif Polymer_Resin == 'Polymer_Resin':
             if y == Target_Resource:
                 PR_Target= Target_Resource_Amount
-            results = craft(y, recipe, Target, 'Crude_Oil', None, None, None, 'Heavy_Oil_Residue')
+            results = craft(y, Polymer_Resin, PR_Target, 'Crude_Oil', None, None, None, 'Heavy_Oil_Residue')
             Crude_Oil_Target += results['Amount of Input 1']
             HOR_Target -= results['Amount of Byproduct']
             PR_Target = 0
         elif Polymer_Resin == 'Heavy_Oil_Residue':
             if y == Target_Resource:
                 PR_Target= Target_Resource_Amount
-            results = craft(y, recipe, Target, 'Crude_Oil', None, None, None, 'Heavy_Oil_Residue')
+            results = craft(y, Polymer_Resin, PR_Target, 'Crude_Oil', None, None, None, 'Heavy_Oil_Residue')
             Crude_Oil_Target += results['Amount of Input 1']
             PR_Target = 0
     elif y == "Pressure_Conversion_Cube": 
